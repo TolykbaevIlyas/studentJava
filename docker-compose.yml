@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  postgres:
+    image: postgres:14
+    container_name: lab-postgres
+    environment:
+      POSTGRES_USER: labuser
+      POSTGRES_PASSWORD: labpassword
+      POSTGRES_DB: lab_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: lab-backend
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/lab_db
+      SPRING_DATASOURCE_USERNAME: labuser
+      SPRING_DATASOURCE_PASSWORD: labpassword
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      spring.jpa.hibernate.ddl-auto: update
+      spring.jpa.show-sql: "true"
+volumes:
+  pgdata:
