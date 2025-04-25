@@ -33,6 +33,8 @@ public class DataLoader implements CommandLineRunner {
         createStudentIfNotExists("alice@example.com", "Alice", "Smith", "2000-01-01");
         createStudentIfNotExists("bob@example.com", "Bob", "Johnson", "1999-05-15");
         createStudentIfNotExists("ilyas.tolykbaev04@gmail.com", "Ilyas", "Tolykbaev", "2004-06-15");
+        createStudentIfNotExists("conorin318@asaption.com", "adasdf", "asdf", "2004-06-15");
+
 
 
         // Создаем курсы
